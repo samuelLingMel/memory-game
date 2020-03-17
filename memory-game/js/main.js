@@ -36,22 +36,22 @@ function shuffle(array) {
 }
 
 function checkForMatch() {
-	if (cardsInPlay[0] === cardsInPlay[1]) {
+	let x = cardsInPlay.length-1;
+	let y = cardsInPlay.length-2;
+	if (cardsInPlay[x] === cardsInPlay[y]) {
 		alert("You found a match!");
 		tally = tally + 1
 		document.getElementById('score').innerHTML = tally
 	}	else {
 		alert("Sorry, try again."); 
-	}
-}
+}}
+
 function flipCard() {
 	let cardId = this.getAttribute('data-id')
-	console.log("User flipped " + cards[cardId].rank)
 	cardsInPlay.push(cards[cardId].rank)
-	console.log(cards[cardId].cardImage)
-	console.log(cards[cardId].suit)
 	this.setAttribute('src',cards[cardId].cardImage)
-	if (cardsInPlay.length === 2) {
+	let x = cardsInPlay.length-1
+	if (x % 2 == 1) {
   	checkForMatch()
 }}
 
@@ -63,8 +63,7 @@ function createBoard() {
 		cardElement.setAttribute('data-id', i);
 		cardElement.addEventListener('click', flipCard);
 		document.querySelector('#game-board').appendChild(cardElement);
-	}
-}
+}}
 
 createBoard(cards);
 
