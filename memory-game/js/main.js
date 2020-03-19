@@ -40,44 +40,24 @@ let cards = [
 	cardImage: "images/JD.png"
 	},
 	{
-	rank: "queen",
-	suit: "clubs",
-	cardImage: "images/QC.png"
+	rank: "ten",
+	suit: "hearts",
+	cardImage: "images/10H.png"
 	},
 	{
-	rank: "queen",
-	suit: "spades",
-	cardImage: "images/QS.png"
+	rank: "ten",
+	suit: "diamonds",
+	cardImage: "images/10D.png"
 	},
 	{
-	rank: "ace",
-	suit: "clubs",
-	cardImage: "images/AC.png"
+	rank: "nine",
+	suit: "hearts",
+	cardImage: "images/9H.png"
 	},
 	{
-	rank: "ace",
-	suit: "spades",
-	cardImage: "images/AS.png"
-	},	
-	{
-	rank: "king",
-	suit: "clubs",
-	cardImage: "images/KC.png"
-	},
-	{
-	rank: "king",
-	suit: "spades",
-	cardImage: "images/KS.png"
-	},
-	{
-	rank: "jack",
-	suit: "clubs",
-	cardImage: "images/JC.png"
-	},
-	{
-	rank: "jack",
-	suit: "spades",
-	cardImage: "images/JS.png"
+	rank: "nine",
+	suit: "diamonds",
+	cardImage: "images/9D.png"
 	}
 ];
 
@@ -137,7 +117,7 @@ function checkForMatch() {
 }
 
 function flipCard() {
-	if (nextCounter !== 1) {
+	if (nextCounter == 0) {
 	if (this.getAttribute('src') === "images/back.png") {
 		let cardId = Number(this.getAttribute('data-id'));
 		idCardsInPlay.push(cardId);	
@@ -146,11 +126,11 @@ function flipCard() {
 		let x = cardsInPlay.length-1;
 	if (x % 2 === 1) {
   		checkForMatch();
-  	}}	else {
+  	}} 	else {
   		alert("Pick a different card");
   	}}  else {
-  		alert("Press the next button");
-  	}
+  		next();
+	}
 }
 
 function createBoard() {
@@ -190,7 +170,8 @@ function next() {
 	createBoard(cards);
 	nextCounter = 0;
 }}
-addEventListener('return', next)
+
+//document.getElementsByTagName('body')[0].addEventListener('keypress', next)
 
 document.getElementById('nextButton').addEventListener('click', next);
 
