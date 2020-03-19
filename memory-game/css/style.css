@@ -92,8 +92,23 @@ GAME BOARD
 ================================ */
 img {
   margin: 40px 8px 0;
+  width: 175px;
+  height: 250px;
 }
 
+button {
+  width: 75px;
+  height: 25px;
+}
+#resetButton {
+  float: left;
+  margin-left: 50px;
+}
+
+#nextButton {
+  float: right;
+  margin-right: 50px;
+}
 /* =============================
 FOOTER
 ================================ */
