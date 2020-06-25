@@ -1,4 +1,4 @@
-# wdi-fundamentals-memorygame
+# Memory Game
 
 A basic program of the game memory game.
 My first webdesign project but I followed a tutorial to comeplete.
