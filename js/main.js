@@ -116,33 +116,62 @@ function checkForMatch() {
 	idCardsInPlay = [];
 }
 
+//function when you click the cards this changes the image and adding it to a array for comparison for pairs
 function flipCard() {
+	
+	//when nextCounter = 0 it means that no pair has been currently selected it's value will change to 1 when a pair has been selected
 	if (nextCounter == 0) {
+	
+	//checking if the clicked on card has been clicked before this turn(stops clicking the same card twice)
 	if (this.getAttribute('src') === "images/back.png") {
+		
+		//putting a new cards number in the array into the variable cardId(in the case you get a pair this will be moved to the array for successful paris cardsPair)
 		let cardId = Number(this.getAttribute('data-id'));
+
+		//then adding that to idCardsInPlay array(this is for the next function to not reset it)
 		idCardsInPlay.push(cardId);	
+
+		//moving the cardId(rank) to an array for comparison
 		cardsInPlay.push(cards[cardId].rank);
+
+		//changing the image src from the card back to the face(set in ther array cards) giving the illusion of it flipping over
 		this.setAttribute('src',cards[cardId].cardImage);
+
+		//checking if two cards have been selected
 		let x = cardsInPlay.length-1;
-	if (x % 2 === 1) {
-  		checkForMatch();
-  	}} 	else {
-  		alert("Pick a different card");
+		
+		//if there is an even number they have selected two cards so check if they match
+		if (x % 2 === 1) {
+  			checkForMatch();
+	  
+	//if they try to pick the same card twice alerting them stop
+	}} 	else {
+		alert("Pick a different card");
+		  
+	//if they have already chosen two cards and are trying to choose another
   	}}  else {
+
+		//then run next to flip cards over and clear variables ready for the next choice
   		next();
 	}
 }
 
+//function to createboard used to also reset board and flip incorrect guesses
 function createBoard() {
+
+	//checking if they are a successful pair 
 	for (let i = 0; i < cards.length; i++) {
+
+		//compare the idnumbers of successful pairs to the cards and not flipping them over
 		if (cardPairs.indexOf(i) >= 0) {
 			let cardElement = document.createElement('img');
 			cardElement.setAttribute('src', cards[i].cardImage);
 			cardElement.setAttribute('data-id', i);
 			cardElement.addEventListener('click', flipCard);			
 			document.querySelector('#game-board').appendChild(cardElement);
-		}
-	 	else {
+		
+		//creates the board by showing the card back and giving it a data id value tying it to the cards arrayxs
+		}	else {
 			let cardElement = document.createElement('img');
 			cardElement.setAttribute('src', "images/back.png");
 			cardElement.setAttribute('data-id', i);
@@ -152,10 +181,12 @@ function createBoard() {
 	}
 }
 
+
 shuffle(cards);
 
 createBoard(cards);
 
+//resets the game board back to beginning
 function reset() {
 	cardPairs = [];
 	document.getElementById('game-board').innerHTML = "";
@@ -164,15 +195,22 @@ function reset() {
 	createBoard(cards); 
 }
 
+//function to get the board ready in between turns
 function next() {
+
+	//the baord only needs to be readied when they have an unsuccessful turn
 	if (document.getElementById('correct').innerHTML != "You found a match!") {
+
+	//clearing the board and making it new in order to flip the cards which were unsuccessful and keep the cards that succeded
 	document.getElementById('game-board').innerHTML = "";
 	createBoard(cards);
+	
+	//reset the next counter to ready it for the next turn
 	nextCounter = 0;
 }}
 
+//artifacts of a previous iterations
 //document.getElementsByTagName('body')[0].addEventListener('keypress', next)
-
-document.getElementById('nextButton').addEventListener('click', next);
+//document.getElementById('nextButton').addEventListener('click', next);
 
 document.getElementById('resetButton').addEventListener('click', reset)
